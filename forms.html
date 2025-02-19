@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/action">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="username" placeholder="Enter username"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="comment">Comment:</label>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br><br>
+        <label for="age"></label>
+        <input type="checkbox" id="age" name="age">I am above 18<br><br>
+        
+        <label for="genderM">Male</label>
+        <input type="radio" name="gender" id="genderM">
+
+        <label for="genderF">Female</label>
+        <input type="radio" name="gender" id="genderF">
+        <select name="profession" id="profession">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="engineer">Engineer</option>
+        </select>
+        <button type="reset">Reset</button>
+        <button>Submit</button>
+    </form>
+
+    <hr/>
+    <form action="https://www.google.com/search?">
+        <input type="text" name="q" placeholder="Search in Google">
+        <button>Search</button>
+    </form>
+    <hr/>
+
+    <select name="cars" id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat">Fiat</option>
+        <option value="audi">Audi</option>
+    </select>
+
+    <label for ="vol">Select your volume level</label>
+    <input type="range" id="vol" >
+    
+
+</body>
+</html>
