@@ -1,0 +1,13 @@
+Interconnected network of computers around the world is called internet.
+
+It encompasses two things- clients and servers.
+Server is a device which is online 24/7 and give data back to client when requested.
+
+every device has unique ipo address through which it is trackable on internet.
+
+Working of Internet-
+1.client request data
+2. Goes to ISP like airtel
+3. Searches in Domain Name System (DNS) which stores the IP address of all Domain
+4. then it goes to Internet Server Provider which gives the IP addres back to client
+5. Through ip address then client can directly connect to server
