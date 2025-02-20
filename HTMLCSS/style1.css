@@ -1,0 +1,109 @@
+/* universal selector */
+*{
+    font-family:"Courier New";
+}
+/* element selector */
+h1,h3{
+    color: purple;
+}
+/* id selector */
+#login{
+    background-color: white;
+}
+
+#signup{
+    background-color: red;
+    color: white;
+}
+/* class selector */
+.upvote{
+    background-color: green;
+    color: white;
+}
+/* descendent selector */
+.post a{
+    color:purple;
+    background-color: yellow;
+}
+
+nav ul li a{
+    color: hotpink;
+}
+/* adjacent sibling combinator */
+p+h3{
+    text-decoration: underline;
+}
+
+.upvote+ button{
+    background-color: lightblue;
+    color:blue;
+}
+/* child combinator */
+div > input{
+    background-color: salmon;
+}
+
+/* attribute selector */
+input[type="text"]{
+   color: red;
+}
+
+input[type="password"]{
+    color: green;
+}
+
+input[type]{
+    background-color: lightblue;
+}
+
+/* id > class >element */
+
+/* pseudo class */
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+h3:hover{
+    text-decoration: overline;
+}
+
+button:active{
+    background-color: hotpink;
+    color: black;
+}
+
+p:active{
+    font-weight: bold;
+    color: green;
+}
+
+.post:nth-of-type(2){
+    background-color: lightblue;
+}
+
+/* pseudo element */
+h1::first-letter{
+    color: green;
+    font-size: 2em;
+}
+
+p::first-line{
+    color: red;
+    font-size: 1.5em;
+}
+
+h1::selection{
+    background-color: yellow;
+    color: black;
+}
+ /* Selector Specificity is a three digit no. which is of format id class element*/
+
+ /* !important  (highest priority and never want to change it)*/
+ h3{
+    color: blue !important;
+ }
+
+ /* Inheritance */
+ /* Inheritance is a mechanism in which a class can inherit properties and methods from another class generally level wise. */
+ 
