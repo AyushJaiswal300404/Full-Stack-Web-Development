@@ -1,0 +1,17 @@
+#box{
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background-color: rgb(217, 109, 109);
+    margin: 10px auto;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#bg{
+    width: 400px;
+    height: 200px;
+    background-color: #7aa874;
+    margin: 10px auto;
+    background-image: url("images.webp");
+    background-size:contain;
+}
