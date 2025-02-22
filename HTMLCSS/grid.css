@@ -1,0 +1,29 @@
+.container{
+    width: 600px;
+    height: 300px;
+    background-color: rgb(17, 24, 24);
+    display: grid;
+    /*grid-template-rows: 50px 50px 50px 50px 50px;*/
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 100px 100px 100px auto; 
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-items: end;
+    align-items: start;
+}
+
+.box{
+    width: 100px;
+    height: 50px;
+    background-color: aqua;
+    border: 2px solid black;
+    text-align: center;
+}
+
+#one{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+}

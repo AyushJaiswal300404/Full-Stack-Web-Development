@@ -1,0 +1,54 @@
+.box{
+    height: 100px;
+    width: 300px;
+    background-color: rgb(162, 145, 145);
+    /*animation-name:widthAnimate;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;*/
+    animation: colorAnimate 2s ease-in 1s infinite alternate;
+}
+
+@keyframes fontAnimationExample{
+    from{
+        font-size: 20px;
+    }
+    to{
+        font-size: 40px;
+    }
+}
+
+@keyframes colorAnimate{
+    0%{
+        background-color: rgb(162, 145, 145);
+    }
+    50%{
+        background-color: rgb(61, 120, 148);
+    }
+    100%{
+        background-color: rgb(162, 145, 145);
+    }
+}
+
+@keyframes widthAnimate{
+    from{
+        width: 300px;
+    }
+    to{
+        width: 500px;
+    }
+}
+
+@media(min-width: 300px){
+    h1{
+        background-color: rgb(87, 62, 24);
+    }
+}
+
+@media(orienation: landscape){
+    h1{
+        background-color: red;
+    }
+}
