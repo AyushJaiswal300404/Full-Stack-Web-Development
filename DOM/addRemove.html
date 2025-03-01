@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Add/Remove Elements</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .item {
+            margin: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>DOM Element Management</h2>
+        
+        <!-- Add Element Section -->
+        <div class="add-section">
+            <input type="text" id="itemInput" placeholder="Enter item text">
+            <button onclick="addElement()">Add Element</button>
+            <button onclick="addBeforeFirst()">Add at Beginning</button>
+        </div>
+
+        <!-- List Container -->
+        <div id="listContainer">
+            <div class="item">
+                Initial Item
+                <span class="delete-btn" onclick="removeElement(this)">×</span>
+            </div>
+        </div>
+
+        <!-- Clone Section -->
+        <div class="clone-section">
+            <button onclick="cloneElement()">Clone First Element</button>
+            <button onclick="replaceElement()">Replace First Element</button>
+        </div>
+    </div>
+
+    <script>
+        function addElement() {
+            const input = document.getElementById('itemInput');
+            if (!input.value.trim()) return;
+
+            // Create new element
+            const newItem = document.createElement('div');
+            newItem.className = 'item';
+            
+            // Add text content
+            newItem.innerHTML = `
+                ${input.value}
+                <span class="delete-btn" onclick="removeElement(this)">×</span>
+            `;
+
+            // Append to container
+            document.getElementById('listContainer').appendChild(newItem);
+            input.value = '';
+        }
+
+        function addBeforeFirst() {
+            const input = document.getElementById('itemInput');
+            if (!input.value.trim()) return;
+
+            const newItem = document.createElement('div');
+            newItem.className = 'item';
+            newItem.innerHTML = `
+                ${input.value}
+                <span class="delete-btn" onclick="removeElement(this)">×</span>
+            `;
+
+            const container = document.getElementById('listContainer');
+            const firstItem = container.firstChild;
+            container.insertBefore(newItem, firstItem);
+            input.value = '';
+        }
+
+        function removeElement(element) {
+            element.parentElement.remove();
+        }
+
+        function cloneElement() {
+            const container = document.getElementById('listContainer');
+            const firstItem = container.firstElementChild;
+            if (!firstItem) return;
+
+            // Clone with all child nodes
+            const clone = firstItem.cloneNode(true);
+            container.appendChild(clone);
+        }
+
+        function replaceElement() {
+            const container = document.getElementById('listContainer');
+            const firstItem = container.firstElementChild;
+            if (!firstItem) return;
+
+            const newItem = document.createElement('div');
+            newItem.className = 'item';
+            newItem.innerHTML = `
+                Replaced Item
+                <span class="delete-btn" onclick="removeElement(this)">×</span>
+            `;
+
+            container.replaceChild(newItem, firstItem);
+        }
+    </script>
+</body>
+</html>
