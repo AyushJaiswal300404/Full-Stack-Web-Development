@@ -1,0 +1,103 @@
+<!-- DOM represents the structure of an HTML document as a tree of objects. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Demo</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+        .selected {
+            border: 2px solid blue;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-title">Welcome to DOM</h1>
+        
+        <div class="content">
+            <p>This is a paragraph demonstrating DOM structure.</p>
+            <ul id="item-list">
+                <li class="item">Item 1</li>
+                <li class="item">Item 2</li>
+                <li class="item">Item 3</li>
+            </ul>
+        </div>
+
+        <div class="buttons">
+            <button onclick="changeTitle()">Change Title</button>
+            <button onclick="addItem()">Add Item</button>
+            <button onclick="highlightItems()">Highlight Items</button>
+            <button onclick="changeParagraphs()">Change Paragraphs</button>
+            <button onclick="useQuerySelector()">Query Selector</button>
+            <button onclick="useQuerySelectorAll()">Query Selector All</button>
+        </div>
+    </div>
+
+    <script>
+        // Example of getElementsById
+        function changeTitle() {
+            const title = document.getElementById('main-title');
+            title.textContent = 'Title Changed!';
+            title.style.color = 'blue';
+        }
+        
+        function addItem() {
+            const list = document.getElementById('item-list');
+            const newItem = document.createElement('li');
+            newItem.textContent = 'New Item';
+            newItem.className = 'item';
+            list.appendChild(newItem);
+        }
+
+        // Example of getElementsByClassName
+        function highlightItems() {
+            const items = document.getElementsByClassName('item');
+            for(let item of items) {
+                item.classList.toggle('highlight');
+            }
+        }
+
+        // Example of getElementsByTagName
+        function changeParagraphs() {
+            const paragraphs = document.getElementsByTagName('p');
+            for(let p of paragraphs) {
+                p.style.fontStyle = 'italic';
+                p.textContent += ' (Modified)';
+            }
+        }
+
+        // Example of querySelector
+        function useQuerySelector() {
+            // Selects the first matching element
+            const firstItem = document.querySelector('.item');
+            firstItem.classList.add('selected');
+            
+            // Using more specific selector
+            const contentDiv = document.querySelector('div.content');
+            contentDiv.style.backgroundColor = '#f0f0f0';
+        }
+
+        // Example of querySelectorAll
+        function useQuerySelectorAll() {
+            // Select all items using complex selector
+            const allItems = document.querySelectorAll('#item-list li.item');
+            
+            allItems.forEach((item, index) => {
+                item.textContent += ` (${index + 1})`;
+                item.style.color = 'green';
+            });
+
+            // Combining multiple selectors
+            const paragraphsAndItems = document.querySelectorAll('p, .item');
+            paragraphsAndItems.forEach(element => {
+                element.style.fontWeight = 'bold';
+            });
+        }
+    </script>
+</body>
+</html>

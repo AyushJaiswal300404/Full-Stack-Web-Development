@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Style Manipulation</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            border: 2px solid black;
+            transition: all 0.3s ease;
+        }
+        
+        .button-panel {
+            margin: 20px;
+        }
+        
+        .transformed {
+            transform: rotate(45deg) scale(1.2);
+        }
+        
+        .fancy {
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-panel">
+        <button onclick="changeBackground()">Change Background</button>
+        <button onclick="changeDimensions()">Change Size</button>
+        <button onclick="addTransform()">Add Transform</button>
+        <button onclick="changeMultipleStyles()">Multiple Styles</button>
+        <button onclick="toggleClass()">Toggle Class</button>
+    </div>
+
+    <div id="styleBox" class="box"></div>
+
+    <script>
+        //Through javascript for manipulating styles, we can use the style property of an element to access and modify its styles.
+        //The style property is an object that contains all the inline styles of an element.
+        //But it only gives access to the inline styles, not the styles defined in a stylesheet.
+        //Therfore we use classList property to add, remove or toggle classes and give styles to the elements.
+        //classList.add('class-name') to add a class
+        //classList.remove('class-name') to remove a class
+        //classList.toggle('class-name') to add a class if it's not there, or remove it if it is
+        //classList.contains('class-name') to check if an element has a class
+
+        
+        const box = document.getElementById('styleBox');
+
+        // Change background color using style property
+        function changeBackground() {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            box.style.backgroundColor = randomColor;
+        }
+
+        // Modify dimensions
+        function changeDimensions() {
+            box.style.width = '300px';
+            box.style.height = '150px';
+            box.style.borderWidth = '5px';
+        }
+
+        // Add transform
+        function addTransform() {
+            box.classList.toggle('transformed');
+        }
+
+        // Change multiple styles at once
+        function changeMultipleStyles() {
+            Object.assign(box.style, {
+                backgroundColor: '#ff6b6b',
+                borderColor: '#339af0',
+                borderStyle: 'dashed',
+                borderRadius: '25px',
+                transform: 'translateY(20px)'
+            });
+        }
+
+        
+
+        // Toggle class demonstration
+        function toggleClass() {
+            box.classList.toggle('fancy');
+        }
+
+        // Demonstrate getting computed styles
+        function getComputedStyleDemo() {
+            const computedStyle = window.getComputedStyle(box);
+            console.log('Width:', computedStyle.width);
+            console.log('Background:', computedStyle.backgroundColor);
+        }
+    </script>
+</body>
+</html>

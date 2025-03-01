@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Navigation Demo</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+        .selected {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <h1>DOM Navigation Examples</h1>
+        
+        <div id="parent">
+            <div class="child">First Child</div>
+            <div class="child">Second Child</div>
+            <div class="child">Third Child</div>
+        </div>
+
+        <div id="siblings">
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+            <p>Paragraph 3</p>
+        </div>
+
+        <div class="controls">
+            <button onclick="demonstrateParentChild()">Parent-Child Navigation</button>
+            <button onclick="demonstrateSiblings()">Sibling Navigation</button>
+            <button onclick="navigateNodes()">Node Navigation</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function demonstrateParentChild() {
+            // Parent to children navigation
+            const parent = document.getElementById('parent');
+            const children = parent.children;
+            const firstChild = parent.firstElementChild;
+            const lastChild = parent.lastElementChild;
+
+            // Child to parent navigation
+            const secondChild = children[1];
+            const parentElement = secondChild.parentElement;
+
+            displayResult(`
+                Number of children: ${children.length}
+                First child text: ${firstChild.textContent}
+                Last child text: ${lastChild.textContent}
+                Parent ID: ${parentElement.id}
+            `);
+
+            // Highlight elements
+            firstChild.classList.add('highlight');
+            lastChild.classList.add('selected');
+        }
+
+        function demonstrateSiblings() {
+            const siblings = document.getElementById('siblings');
+            const middleParagraph = siblings.children[1];
+            
+            // Navigate between siblings
+            const previousSibling = middleParagraph.previousElementSibling;
+            const nextSibling = middleParagraph.nextElementSibling;
+
+            displayResult(`
+                Previous sibling: ${previousSibling.textContent}
+                Current element: ${middleParagraph.textContent}
+                Next sibling: ${nextSibling.textContent}
+            `);
+
+            // Highlight current element
+            middleParagraph.classList.add('highlight');
+        }
+
+        function navigateNodes() {
+            const container = document.getElementById('main-container');
+            
+            // Navigate through all nodes (including text nodes)
+            const childNodes = container.childNodes;
+            const firstNode = container.firstChild;
+            const lastNode = container.lastChild;
+
+            let nodeTypes = [];
+            childNodes.forEach(node => {
+                nodeTypes.push(node.nodeType === 1 ? 'Element' : 'Text');
+            });
+
+            displayResult(`
+                Number of nodes: ${childNodes.length}
+                Node types: ${nodeTypes.join(', ')}
+                First node type: ${firstNode.nodeType}
+                Last node type: ${lastNode.nodeType}
+            `);
+        }
+
+        function displayResult(text) {
+            document.getElementById('result').innerHTML = text.replace(/\n/g, '<br>');
+        }
+    </script>
+</body>
+</html>

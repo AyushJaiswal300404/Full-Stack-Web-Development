@@ -1,0 +1,99 @@
+<!-- innertext wo content deta h jo screen pe dikhta h
+textContent pura content deta h jo screen pe nhi bhi dikhta h woh bhi
+innerhtml pura html markup deta h -->
+
+<!-- getter and setter(we can get and set the value of the element)
+getter: jo value get karne k liye use hota h (getAttribute)
+setter: jo value set karne k liye use hota h (setAttribute) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Demo</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .highlight {
+            background-color: yellow;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Element for demonstrating text manipulations -->
+        <div id="textDemo">
+            This is visible text
+            <span class="hidden">This is hidden text</span>
+            <span style="display: none;">Another hidden text</span>
+        </div>
+
+        <!-- Element for demonstrating innerHTML -->
+        <div id="htmlDemo">
+            <p>Original <strong>HTML</strong> content</p>
+        </div>
+
+        <!-- Element for demonstrating attributes -->
+        <img id="demoImage" src="placeholder.jpg" alt="demo image" data-info="original">
+
+        <!-- Control buttons -->
+        <div class="controls">
+            <button onclick="showInnerText()">Show innerText</button>
+            <button onclick="showTextContent()">Show textContent</button>
+            <button onclick="changeInnerHTML()">Change innerHTML</button>
+            <button onclick="demonstrateAttributes()">Check Attributes</button>
+        </div>
+
+        <!-- Results display -->
+        <div id="results" class="highlight"></div>
+    </div>
+
+    <script>
+        function showInnerText() {
+            const textDemo = document.getElementById('textDemo');
+            const results = document.getElementById('results');
+            results.innerText = `innerText shows: ${textDemo.innerText}`;
+        }
+
+        function showTextContent() {
+            const textDemo = document.getElementById('textDemo');
+            const results = document.getElementById('results');
+            results.innerText = `textContent shows: ${textDemo.textContent}`;
+        }
+
+        function changeInnerHTML() {
+            const htmlDemo = document.getElementById('htmlDemo');
+            // Demonstrating innerHTML
+            htmlDemo.innerHTML = `
+                <h3>Updated Content</h3>
+                <p>This is <em>new</em> content with <strong>HTML</strong> tags</p>
+            `;
+        }
+
+        function demonstrateAttributes() {
+            const img = document.getElementById('demoImage');
+            const results = document.getElementById('results');
+
+            // Get attribute
+            const originalSrc = img.getAttribute('src');
+            const originalAlt = img.getAttribute('alt');
+
+            // Set attribute
+            img.setAttribute('src', 'new-image.jpg');
+            img.setAttribute('data-info', 'modified');
+            img.setAttribute('class', 'highlight');
+
+            // Show results
+            results.innerHTML = `
+                Original src: ${originalSrc}<br>
+                Original alt: ${originalAlt}<br>
+                New src: ${img.getAttribute('src')}<br>
+                New data-info: ${img.getAttribute('data-info')}
+            `;
+        }
+    </script>
+</body>
+</html>
