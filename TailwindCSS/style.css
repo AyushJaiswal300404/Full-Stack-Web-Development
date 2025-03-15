@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  /* ... */
+  --color-harry: #973456;
+}
+body {
+  background-color: black;
+}
+
+@layer components {
+  .card {
+    @apply m-10 rounded-lg bg-white px-6 py-8 shadow-xl ring-1 ring-slate-900/5 dark:bg-black;
+  }
+}
+
+@utility flex-center{
+    @apply flex justify-center items-center;
+}

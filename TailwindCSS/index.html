@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- General -->
+    <div class="bg-violet-200 h-10 w-full border-2 border-violet-600 rounded-md my-4 p-6 flex justify-center items-center">
+        <h1 class="text-center font-mono font-extrabold text-[30px]">Hello World</h1>
+    </div>
+    <br/>
+    <!-- Flex -->
+    <div class="flex flex-col items-center justify-center space-y-6 mt-2">
+        <div class="h-16 w-16 rounded-full bg-blue-500"></diV>
+        <div class="h-16 w-16 rounded-full bg-orange-500"></diV>
+        <div class="h-16 w-16 rounded-full bg-green-500"></diV>
+    </div>
+    <br/>
+    <!-- Grid -->
+    <div class="grid grid-cols-3 gap-2 mt-2 mx-2">
+        <div class="h-16 rounded-full bg-blue-500"></diV>
+        <div class="h-16  rounded-full bg-orange-500"></diV>
+        <div class="h-16 w-16 rounded-full bg-green-500"></diV>
+    </div>
+    <br/>
+    <!-- Media Query -->
+    <div class="sm:bg-amber-500 md:block hidden">
+        <p class="text-white">I appear on screen wider than 768 px</p>
+    </div>
+    <br/>
+    <!-- Dark Mode -->
+    <div class="bg-white dark:bg-black text-black dark:text-white">
+        Dark Mode Enabled
+    </div>
+    <br/>
+    <!-- Config -->
+    <p class="text-[#973456] p-[16px] text-harry">Hello</p>
+    <div class="card flex-center">
+        Hello
+        <div></div>
+    </div>
+
+
+</body>
+</html>
