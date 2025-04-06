@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a new post</title>
+    <title>Create New Post</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <form method="post" action="/posts"> 
-        <input placeholder="Enter your username" name="username" required><br/><br/>
-        <textarea placeholder="Enter your post" name="content" required></textarea><br/>
-        <button type="submit">Create Post</button>
-    </form>
+    <header>
+        <h1>Create a New Post</h1>
+    </header>
+    <main class="form-container">
+        <form action="/posts" method="POST" class="form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+            
+            <button class="btn create-btn" type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Quora Styled App</p>
+    </footer>
 </body>
 </html>

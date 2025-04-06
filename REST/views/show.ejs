@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post in Detail</title>
+    <title>Post Details</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>Here is your Post in Detail</h2>
-    <p>Post id: <%= post.id %></p>
-    <div class="post">
-        <h3 class="user">@<%= post.username%></h3>
-        <h4><%=post.content%></h4>
-    </div>
-
+    <header>
+        <h1>Post Details</h1>
+    </header>
+    <main class="post-details">
+        <div class="post">
+            <h3 class="user">@<%= post.username %></h3>
+            <p class="content"><%= post.content %></p>
+        </div>
+        <div class="actions">
+            <a class="btn" href="/posts/<%= post.id %>/edit">Edit</a>
+            <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="delete-form">
+                <button class="btn delete-btn" type="submit">Delete</button>
+            </form>
+        </div>
+        <a class="btn create-btn" href="/posts">Back to All Posts</a>
+    </main>
+    <footer>
+        <p>&copy; 2023 Quora Styled App</p>
+    </footer>
 </body>
 </html>

@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>Edit your post</h2>
-    <p>Post id: <%=post.id%></p>
-    <p>Post username: @<%=post.username%></p>
-    <form action="/posts/<%= post.id %>?_method=PATCH" method="POST">
-        <textarea rows="10" cols="35" id="content" name="content" required><%= post.content %></textarea><br/>
-        <button type="submit">Update Post</button>
-    </form>
+    <header>
+        <h1>Edit Post</h1>
+    </header>
+    <main class="form-container">
+        <form action="/posts/<%= post.id %>?_method=PATCH" method="POST" class="form">
+            <label for="content">Edit Content:</label>
+            <textarea id="content" name="content" rows="5" required><%= post.content %></textarea>
+            
+            <button class="btn create-btn" type="submit">Update</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Quora Styled App</p>
+    </footer>
 </body>
 </html>
