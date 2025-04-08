@@ -22,7 +22,7 @@ connection.end();
 let getRandomUser = ()=> {
     return {
       indexedDBd: faker.string.uuid(),
-      username: faker.internet.username(), // before version 9.1.0, use userName()
+      username: faker.internet.username(), 
       email: faker.internet.email(),
       password: faker.internet.password(),
     };
