@@ -1,0 +1,406 @@
+// Microsoft Windows [Version 10.0.26100.3624]
+// (c) Microsoft Corporation. All rights reserved.
+
+// C:\Windows\System32>C:\Users\ayush>net start MongoDB
+// 'C:\Users\ayush' is not recognized as an internal or external command,
+// operable program or batch file.
+
+// C:\Windows\System32>System error 5 has occurred.
+// 'System' is not recognized as an internal or external command,
+// operable program or batch file.
+
+// C:\Windows\System32>
+// C:\Windows\System32>net start MongoDB
+// The requested service has already been started.
+
+// More help is available by typing NET HELPMSG 2182.
+
+
+// C:\Windows\System32>mongosh
+// Current Mongosh Log ID: 67f6d71b6a95b0b2acb5f898
+// Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.0
+// Using MongoDB:          8.0.6
+// Using Mongosh:          2.5.0
+
+// For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+// ------
+//    The server generated these startup warnings when booting
+//    2025-04-10T01:33:32.224+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+// ------
+
+// test> help
+
+//   Shell Help:
+
+//     log                                        'log.info(<msg>)': Write a custom info/warn/error/fatal/debug message to the log file
+//                                                'log.getPath()': Gets a path to the current log file
+
+//     use                                        Set current database
+//     show                                       'show databases'/'show dbs': Print a list of all available databases
+//                                                'show collections'/'show tables': Print a list of all collections for cur
+// test> show dbs
+// TestDB   8.00 KiB
+// admin   40.00 KiB
+// config  72.00 KiB
+// local   72.00 KiB
+// test> quit
+
+// C:\Windows\System32>mongosh
+// Current Mongosh Log ID: 67f6d7a6f50db580b1b5f898
+// Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.0
+// Using MongoDB:          8.0.6
+// Using Mongosh:          2.5.0
+
+// For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+// ------
+//    The server generated these startup warnings when booting
+//    2025-04-10T01:33:32.224+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+// ------
+
+// test> 1+2
+// 3
+// test> use college
+// switched to db college
+// college> db
+// college
+// college> show collections
+
+// college> db.student.insertOne({name:"Adam", age:25,marks:97})
+// {
+//   acknowledged: true,
+//   insertedId: ObjectId('67f6db2ef50db580b1b5f899')
+// }
+// college> show collections
+// student
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 97
+//   }
+// ]
+// college> db.student.insertOne({name:"Amy", age:29,marks:98})
+// {
+//   acknowledged: true,
+//   insertedId: ObjectId('67f6db6cf50db580b1b5f89a')
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 97
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   }
+// ]
+// college> db.student.insertMany([{name:"Amee", age:29,marks:98},{name:"Hari"})
+// Uncaught:
+// SyntaxError: Unexpected token, expected "," (1:67)
+
+// > 1 | db.student.insertMany([{name:"Amee", age:29,marks:98},{name:"Hari"})
+//     |                                                                    ^
+//   2 |
+
+// college> db.student.insertMany([{name:"Amee", age:29,marks:98},{name:"Hari"}])
+// {
+//   acknowledged: true,
+//   insertedIds: {
+//     '0': ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     '1': ObjectId('67f6dbe3f50db580b1b5f89c')
+//   }
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 97
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 98
+//   },
+//   { _id: ObjectId('67f6dbe3f50db580b1b5f89c'), name: 'Hari' }
+// ]
+// college> db.student.find({age:29})
+// [
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 98
+//   }
+// ]
+// college> db.student.findOne({age:29})
+// {
+//   _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//   name: 'Amy',
+//   age: 29,
+//   marks: 98
+// }
+// college> db.student.find({age:29, name:"Amy"})
+// [
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   }
+// ]
+// college> db.student.find({marks:{gt:80})
+// Uncaught:
+// SyntaxError: Unexpected token, expected "," (1:30)
+
+// > 1 | db.student.find({marks:{gt:80})
+//     |                               ^
+//   2 |
+
+// college> db.student.find({marks:{gt:80}})
+
+// college> db.student.find({marks:{$gt:80}})
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 97
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 98
+//   }
+// ]
+// college> db.student.updateOne({name:"Adam"},{$set:{marks:99}})
+// {
+//   acknowledged: true,
+//   insertedId: null,
+//   matchedCount: 1,
+//   modifiedCount: 1,
+//   upsertedCount: 0
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 99
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 98
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 98
+//   },
+//   { _id: ObjectId('67f6dbe3f50db580b1b5f89c'), name: 'Hari' }
+// ]
+// college> db.student.updateMany({marks:98},{$set:{marks:92}})
+// {
+//   acknowledged: true,
+//   insertedId: null,
+//   matchedCount: 2,
+//   modifiedCount: 2,
+//   upsertedCount: 0
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 99
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 92
+//   },
+//   { _id: ObjectId('67f6dbe3f50db580b1b5f89c'), name: 'Hari' }
+// ]
+// college> db.student.replaceOne({name:"Hari"},{name:"Taylor",age:39})
+// {
+//   acknowledged: true,
+//   insertedId: null,
+//   matchedCount: 1,
+//   modifiedCount: 1,
+//   upsertedCount: 0
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 99
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89c'),
+//     name: 'Taylor',
+//     age: 39
+//   }
+// ]
+// college> db.student.insertOne({name:"Charlie", performance:{marks:88, grade:"A"}})
+// {
+//   acknowledged: true,
+//   insertedId: ObjectId('67f6e0b8f50db580b1b5f89d')
+// }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db2ef50db580b1b5f899'),
+//     name: 'Adam',
+//     age: 25,
+//     marks: 99
+//   },
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89c'),
+//     name: 'Taylor',
+//     age: 39
+//   },
+//   {
+//     _id: ObjectId('67f6e0b8f50db580b1b5f89d'),
+//     name: 'Charlie',
+//     performance: { marks: 88, grade: 'A' }
+//   }
+// ]
+// college> db.student.find({performance.marks:88})
+// Uncaught:
+// SyntaxError: Unexpected token, expected "," (1:28)
+
+// > 1 | db.student.find({performance.marks:88})
+//     |                             ^
+//   2 |
+
+// college> db.student.find({"performance.marks":88})
+// [
+//   {
+//     _id: ObjectId('67f6e0b8f50db580b1b5f89d'),
+//     name: 'Charlie',
+//     performance: { marks: 88, grade: 'A' }
+//   }
+// ]
+// college> db.student.deleteOne({marks:99})
+// { acknowledged: true, deletedCount: 1 }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6db6cf50db580b1b5f89a'),
+//     name: 'Amy',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89b'),
+//     name: 'Amee',
+//     age: 29,
+//     marks: 92
+//   },
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89c'),
+//     name: 'Taylor',
+//     age: 39
+//   },
+//   {
+//     _id: ObjectId('67f6e0b8f50db580b1b5f89d'),
+//     name: 'Charlie',
+//     performance: { marks: 88, grade: 'A' }
+//   }
+// ]
+// college> db.student.deleteMany({marks:92})
+// { acknowledged: true, deletedCount: 2 }
+// college> db.student.find()
+// [
+//   {
+//     _id: ObjectId('67f6dbe3f50db580b1b5f89c'),
+//     name: 'Taylor',
+//     age: 39
+//   },
+//   {
+//     _id: ObjectId('67f6e0b8f50db580b1b5f89d'),
+//     name: 'Charlie',
+//     performance: { marks: 88, grade: 'A' }
+//   }
+// ]
+// college> db.student.deleteMany({})
+// { acknowledged: true, deletedCount: 2 }
+// college> db.student.find()
+
+// college> db.dropBase()
+// TypeError: db.dropBase is not a function
+// college> db.dropDatabase()
+// { ok: 1, dropped: 'college' }
+// college> show dbs
+// TestDB    8.00 KiB
+// admin    40.00 KiB
+// config  108.00 KiB
+// local    72.00 KiB
