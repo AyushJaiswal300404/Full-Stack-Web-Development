@@ -4,35 +4,43 @@
     <br/><br/>
     <h3>Create New Listing</h3>
     <br/>
-    <form method="POST" action="/listings">
+    <form method="POST" action="/listings" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" placeholder="Add a catchy title" class="form-control" required>
+            <input type="text" name="title" id="title" placeholder="Add a catchy title" class="form-control" required>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a title.</div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" placeholder="Enter Description" class="form-control"></textarea>
+            <textarea name="description" id="description" placeholder="Enter Description" class="form-control" required></textarea>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a description.</div>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image URL</label>
-            <input type="text" name="image" placeholder="Enter Image URL" class="form-control">
+            <input type="url" name="image" id="image" placeholder="Enter Image URL" class="form-control">
+            <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="row">
             <div class="mb-3 col-md-4">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" name="price" placeholder="1200" class="form-control" required>
+                <input type="number" name="price" id="price" placeholder="1200" class="form-control" required min="0">
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please provide a valid price.</div>
             </div>
-    
             <div class="mb-3 col-md-8">
                 <label for="country" class="form-label">Country</label>
-                <input type="text" name="country" placeholder="India" class="form-control" required>
+                <input type="text" name="country" id="country" placeholder="India" class="form-control" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please provide a country name.</div>
             </div>
         </div>
-        
-
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input type="text" name="location" placeholder="Goa" class="form-control" required>
+            <input type="text" name="location" id="location" placeholder="Goa" class="form-control" required>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a location.</div>
         </div>
         <br/>
         <button type="submit" class="btn btn-dark add-btn">Add Listing</button>
@@ -40,3 +48,5 @@
     <br/><br/><br/>
 </div>
 </div>
+
+

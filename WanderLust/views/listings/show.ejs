@@ -12,7 +12,7 @@
                 <p class="card-text"><%= listing.description %></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-muted"><i class="fas fa-rupee-sign"></i> <%= listing.price.toLocaleString("en-IN") %></li>
+                <li class="list-group-item text-muted"><i class="fas fa-rupee-sign"></i> <%= listing.price ? listing.price.toLocaleString("en-IN") : 'N/A' %></li>
                 <li class="list-group-item text-muted"><i class="fas fa-location-dot"></i> <%= listing.location %></li>
                 <li class="list-group-item text-muted"><i class="fas fa-flag"></i> <%= listing.country %></li>
             </ul>
