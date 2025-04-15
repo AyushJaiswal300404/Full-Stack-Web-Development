@@ -16,3 +16,34 @@
       }, false)
     })
   })()
+
+// Rating display and validation
+const ratings = document.querySelectorAll('input[type="range"][name="review[rating]"]')
+ratings.forEach(rating => {
+    const valueDisplay = rating.parentElement.querySelector('#ratingValue')
+    if (rating && valueDisplay) {
+        // Update rating value display
+        rating.addEventListener('input', () => {
+            valueDisplay.textContent = rating.value
+        })
+    }
+})
+
+// Comment validation
+const comments = document.querySelectorAll('textarea[name="review[comment]"]')
+comments.forEach(comment => {
+    comment.addEventListener('input', () => {
+        const length = comment.value.length
+        const minLength = 20
+        const maxLength = 500
+
+        if (length < minLength) {
+            comment.setCustomValidity(`Please add ${minLength - length} more characters`)
+        } else if (length > maxLength) {
+            comment.setCustomValidity(`Please remove ${length - maxLength} characters`)
+        } else {
+            comment.setCustomValidity('')
+        }
+        comment.reportValidity()
+    })
+})
