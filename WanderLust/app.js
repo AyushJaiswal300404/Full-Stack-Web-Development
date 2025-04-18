@@ -6,6 +6,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -30,11 +32,34 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(cookieParser("secretKey"));
 
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 30, // 1 month
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 30, // 1 month
+
+    }
+}
+
+
 //Basic API
 app.get("/",(req,res)=>{
     // res.cookie("name", "Ayush",{signed:true, httpOnly:true});
     let {name="Harry"} = req.cookies;
     res.send(`Hello ${name}, welcome to WanderLust!`);
+});
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    // res.locals.currentUser = req.session.userId;
+    next();
 });
 
 app.use("/listings", listings);
