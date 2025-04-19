@@ -66,10 +66,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Flash and currentUser middleware
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    // res.locals.currentUser = req.session.userId;
+    res.locals.currentUser = req.user; 
     next();
 });
 

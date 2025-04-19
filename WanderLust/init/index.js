@@ -12,18 +12,25 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 }
 
+
 const initDB = async() => {
     try {
-        //delete previous data
+        // Delete previous data
         await Listing.deleteMany({});
-        //insert new data
-        await Listing.insertMany(initData.data);
-        console.log("Database initialized with new data!");
+        
+        // Create a valid ObjectId for owner
+        const sampleOwnerId = new mongoose.Types.ObjectId();
+        
+        // Insert new data with valid owner ID
+        const listingsWithOwner = initData.data.map((obj) => ({
+            ...obj, 
+            owner: sampleOwnerId
+        }));
+        
+        await Listing.insertMany(listingsWithOwner);
+        console.log("Data initialized with owner:", sampleOwnerId);
     } catch(err) {
-        console.log("Error initializing database!");
-        console.log(err);
-    } finally {
-        mongoose.connection.close();
+        console.log("Error initializing database:", err);
     }
 }
 
