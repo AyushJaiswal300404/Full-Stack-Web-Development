@@ -1,58 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require('../middleware.js');
+const userController = require("../controllers/users.js");
 
 // Signup Routes
-router.get("/signup", (req, res) => {
-    res.render("users/signup.ejs");
-});
+router.get("/signup",userController.renderSignupForm);
 
-router.post("/signup", wrapAsync(async (req, res, next) => {
-    try {
-        const {username, email, password} = req.body;
-        const newUser = new User({email, username});
-        const registeredUser = await User.register(newUser, password);
-        req.login(registeredUser, (err) => {
-            if(err) return next(err);
-            req.flash("success", "Welcome to WanderLust!");
-            res.redirect("/listings");
-        });
-    } catch(err) {
-        req.flash("error", err.message);
-        res.redirect("/signup");
-    }
-}));
+router.post("/signup", wrapAsync(userController.signup));
 
 // Login Routes
-router.get("/login", (req, res) => {
-    res.render("users/login.ejs");
-});
+router.get("/login", userController.renderLoginForm);
 
-router.post("/login", 
-    saveRedirectUrl,
+router.post("/login", saveRedirectUrl,
     passport.authenticate("local", {
         failureRedirect: "/login",
         failureFlash: true
     }), 
-    async (req, res) => {
-        req.flash("success", `Welcome back ${req.user.username}!`);
-        const redirectUrl = res.locals.redirectUrl || "/listings";
-        res.redirect(redirectUrl);
-    }
+    userController.login
 );
 
 // Logout Route
-router.get("/logout", (req, res, next) => {
-    req.logout((err) => {
-        if(err) {
-            return next(err);
-        }
-        req.flash("success", "Logged out successfully!");
-        res.redirect("/listings");
-    });
-});
+router.get("/logout", userController.logout);
 
 module.exports = router;
