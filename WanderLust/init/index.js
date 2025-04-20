@@ -24,7 +24,7 @@ const initDB = async() => {
         // Insert new data with valid owner ID
         const listingsWithOwner = initData.data.map((obj) => ({
             ...obj, 
-            owner: sampleOwnerId
+            owner: "680423db3b5169dffb66d5a7"
         }));
         
         await Listing.insertMany(listingsWithOwner);
