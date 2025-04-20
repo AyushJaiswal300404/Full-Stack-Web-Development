@@ -3,6 +3,10 @@
   
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll('.needs-validation')
+    const commentTextarea = document.querySelector('#comment');
+    const invalidFeedback = commentTextarea?.nextElementSibling;
+
+
   
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
@@ -34,7 +38,7 @@ const comments = document.querySelectorAll('textarea[name="review[comment]"]')
 comments.forEach(comment => {
     comment.addEventListener('input', () => {
         const length = comment.value.length
-        const minLength = 20
+        const minLength = 5
         const maxLength = 500
 
         if (length < minLength) {

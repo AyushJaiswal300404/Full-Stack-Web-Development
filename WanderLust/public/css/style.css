@@ -105,3 +105,9 @@ body{
     height:30vh;
 
 }
+
+.star-rating-display {
+    transform: scale(0.6); /* Makes the stars 60% of original size */
+    transform-origin: left; /* Keeps the stars aligned to the left */
+    margin-bottom: -5px; /* Adjusts vertical spacing */
+}
