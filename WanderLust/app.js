@@ -51,12 +51,12 @@ const sessionConfig = {
     }
 };
 
-//Basic API
-app.get("/",(req,res)=>{
-    // res.cookie("name", "Ayush",{signed:true, httpOnly:true});
-    let {name="Harry"} = req.cookies;
-    res.send(`Hello ${name}, welcome to WanderLust!`);
-});
+// //Basic API
+// app.get("/",(req,res)=>{
+//     // res.cookie("name", "Ayush",{signed:true, httpOnly:true});
+//     let {name="Harry"} = req.cookies;
+//     res.send(`Hello ${name}, welcome to WanderLust!`);
+// });
 
 // Middleware for flash message and session management
 app.use(session(sessionConfig));
