@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -21,16 +22,23 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 //Database
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL;
 
-main()
-.then(()=>{
-    console.log("Connected to MongoDB successfully!");
-})
-.catch(err=>console.log(err));
-async function main(){
-    await mongoose.connect(MONGO_URL);
+async function main() {
+    try {
+        await mongoose.connect(dbUrl, {
+            serverSelectionTimeoutMS: 60000,
+            socketTimeoutMS: 45000,
+            connectTimeoutMS: 60000
+        });
+        console.log("Connected to MongoDB Atlas successfully!");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+        process.exit(1);
+    }
 }
+
+main().catch(err => console.error("Initial connection error:", err));
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -38,10 +46,19 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
-app.use(cookieParser("secretKey"));
+app.use(cookieParser(process.env.SECRET));
+
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: process.env.SECRET,
+    }
+})
 
 const sessionConfig = {
-    secret: "mysecretcode",
+    store: store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -51,12 +68,9 @@ const sessionConfig = {
     }
 };
 
-// //Basic API
-// app.get("/",(req,res)=>{
-//     // res.cookie("name", "Ayush",{signed:true, httpOnly:true});
-//     let {name="Harry"} = req.cookies;
-//     res.send(`Hello ${name}, welcome to WanderLust!`);
-// });
+store.on("error",()=>{
+    console.log("ERROR in MONGO SESSION STORE")
+})
 
 // Middleware for flash message and session management
 app.use(session(sessionConfig));
