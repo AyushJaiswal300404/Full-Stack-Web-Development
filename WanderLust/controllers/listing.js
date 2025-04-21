@@ -23,18 +23,11 @@ module.exports.showListings = async (req, res) => {
 }
 
 module.exports.createListing =async (req, res) => {
-    const listing = req.body.listing;
-    const defaultImage = {
-        url: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-        filename: "default-image"
-    };
-    
-    if(!listing.image || listing.image === '') {
-        listing.image = defaultImage;
-    }
-
-    const newListing = new Listing(listing);
+    let url=req.file.path;
+    let filename=req.file.filename;
+    const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
+    newListing.image = {url, filename};
     await newListing.save();
     req.flash("success", "Successfully created a new listing!");
     res.redirect("/listings");

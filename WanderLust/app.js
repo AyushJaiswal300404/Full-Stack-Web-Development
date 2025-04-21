@@ -12,6 +12,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
 
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 
 const listingRouter= require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
