@@ -6,7 +6,7 @@
     </div>
     <div class="col-8 offset-2">
         <div class="card">
-            <img src="<%= listing.image?.url || listing.image %>" class="card-img-top show-img" alt="listing_image">
+            <img src="<%= listing.image.url%>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <% if(listing.owner) { %>
                     <p class="card-text">Owner: <%= listing.owner.username %></p>
