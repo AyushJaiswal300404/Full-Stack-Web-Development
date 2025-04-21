@@ -4,7 +4,7 @@
         <br/><br/><br/>
         <h3>Edit Your Listing</h3>
         <br/>
-        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control">
@@ -14,10 +14,13 @@
                 <textarea name="listing[description]" class="form-control"><%= listing.description %></textarea>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image URL</label>
-                <input type="text" 
+                <p>Original Listing Image</p>
+                <img src="<%= orignalImageUrl %>" class="img-fluid" alt="<%= listing.title %>">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload New Image</label>
+                <input type="file" 
                     name="listing[image]" 
-                    value="<%= listing.image && listing.image.url ? listing.image.url : listing.image %>" 
                     class="form-control">
             </div>
             <div class="row">

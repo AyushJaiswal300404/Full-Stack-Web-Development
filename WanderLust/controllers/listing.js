@@ -41,20 +41,20 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash("error", "Listing you requested for does not exist!");
         return res.redirect("/listings");
     }
-    res.render("listings/edit", { listing });
+    let orignalImageUrl=listing.image.url;
+    orignalImageUrl=orignalImageUrl.replace("/upload","/upload/h_300,w_250");
+    res.render("listings/edit", { listing,orignalImageUrl});
 }
 
 module.exports.updateListing = async (req, res) => {
     const { id } = req.params;
-    const updatedData = req.body.listing;
-
-    if (updatedData.image && typeof updatedData.image === "string") {
-        updatedData.image = {
-            url: updatedData.image,
-            filename: "manual-entry"
-        };
+    let listing = await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
+    if(typeof req.file !== "undefined"){
+        listing.image.filename=req.file.filename;
+        listing.image.url=req.file.path;
+        await listing.save();
     }
-    await Listing.findByIdAndUpdate(id, updatedData, { runValidators: true });
+    req.flash("success", "Successfully updated the listing!");
     res.redirect(`/listings/${id}`);
 }
 
