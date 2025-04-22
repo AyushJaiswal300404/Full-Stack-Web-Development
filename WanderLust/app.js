@@ -101,7 +101,6 @@ app.use((req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
 
-// Error handling middleware - keep this as the last middleware
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     if (!err.message) err.message = message;
