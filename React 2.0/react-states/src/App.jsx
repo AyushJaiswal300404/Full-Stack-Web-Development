@@ -1,10 +1,10 @@
 import './App.css'
-import Counter from './Counter'
+import TodoList from './TodoList'
+
 function App() { 
   return (
     <>
-      <h1>States in react</h1>
-      <Counter/>
+      <TodoList />
     </>
   )
 }
