@@ -49,7 +49,7 @@ export default function Form(){
             <label htmlFor="password">Password</label>
             <input 
                 placeholder="Enter your password: " 
-                value={formData.username}
+                value={formData.password}
                 onChange={handleInputChange}
                 id="password"
                 name="password"

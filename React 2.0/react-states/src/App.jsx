@@ -1,10 +1,10 @@
 import './App.css'
-import Form from './Form'
+import Joker from './Joker';
 
 function App() { 
   return (
     <>
-      <Form/>
+      <Joker/>
     </>
   )
 }
