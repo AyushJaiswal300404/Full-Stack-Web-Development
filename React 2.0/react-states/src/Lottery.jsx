@@ -25,3 +25,4 @@ function Lottery({ n, winningSum }) {
 }
 
 export default Lottery;
+
