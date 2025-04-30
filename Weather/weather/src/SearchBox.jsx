@@ -1,6 +1,10 @@
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import './SearchBox.css';
 
@@ -42,6 +46,20 @@ export default function SearchBox() {
         setCity(event.target.value);
     }
 
+    const getWeatherImage = (weatherMain) => {
+        // Return relevant weather image based on condition
+        const weather = weatherMain.toLowerCase();
+        if (weather.includes('cloud')) {
+            return 'https://images.unsplash.com/photo-1611928482473-7b27d24eab80?w=500&auto=format&fit=crop&q=60';
+        } else if (weather.includes('rain')) {
+            return 'https://images.unsplash.com/photo-1618557703025-7ec58c813e05?w=500&auto=format&fit=crop&q=60';
+        } else if (weather.includes('clear')) {
+            return 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=500&auto=format&fit=crop&q=60';
+        } else {
+            return 'https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?w=500&auto=format&fit=crop&q=60';
+        }
+    };
+
     return (
         <div className="search-box">
             <h3>Search for the weather</h3>
@@ -65,28 +83,47 @@ export default function SearchBox() {
                 </Button>
             </form>
             
-            {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
+            {error && (
+                <Typography color="error" sx={{ mt: 2 }}>
+                    {error}
+                </Typography>
+            )}
             
             {weatherData && (
-                <div style={{ 
-                    marginTop: '2rem', 
-                    padding: '1rem',
-                    backgroundColor: '#333', 
-                    color: 'white',        
-                    borderRadius: '8px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                <Card sx={{ 
+                    maxWidth: 345,
+                    mt: 4,
+                    backgroundColor: '#f5f5f5',
+                    margin: '20px auto'
                 }}>
-                    <h4 style={{ 
-                        marginBottom: '1rem',
-                        color: '#fff',
-                        fontSize: '1.5rem'
-                    }}>{weatherData.name}, {weatherData.sys.country}</h4>
-                    <p style={{ margin: '0.5rem 0', color: '#fff' }}>Temperature: {Math.round(weatherData.main.temp)}°C</p>
-                    <p style={{ margin: '0.5rem 0', color: '#fff' }}>Feels like: {Math.round(weatherData.main.feels_like)}°C</p>
-                    <p style={{ margin: '0.5rem 0', color: '#fff' }}>Weather: {weatherData.weather[0].main}</p>
-                    <p style={{ margin: '0.5rem 0', color: '#fff' }}>Humidity: {weatherData.main.humidity}%</p>
-                    <p style={{ margin: '0.5rem 0', color: '#fff' }}>Wind: {weatherData.wind.speed} m/s</p>
-                </div>
+                    <CardMedia
+                        component="img"
+                        height="200"
+                        image={getWeatherImage(weatherData.weather[0].main)}
+                        alt={weatherData.weather[0].main}
+                        sx={{ objectFit: 'cover' }}
+                    />
+                    <CardContent>
+                        <Typography variant="h5" component="div" gutterBottom>
+                            {weatherData.name}, {weatherData.sys.country}
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Temperature: {Math.round(weatherData.main.temp)}°C
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Feels like: {Math.round(weatherData.main.feels_like)}°C
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Weather: {weatherData.weather[0].main}
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Humidity: {weatherData.main.humidity}%
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            Wind: {weatherData.wind.speed} m/s
+                        </Typography>
+                    </CardContent>
+                </Card>
             )}
         </div>
     );
